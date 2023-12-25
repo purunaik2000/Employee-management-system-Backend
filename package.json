@@ -1,0 +1,32 @@
+{
+  "name": "employee-management-system-backend",
+  "version": "1.0.0",
+  "description": "Employee management system is an application where the managment department can store, manage and view the data of employees",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/purunaik2000/Employee-management-system-Backend.git"
+  },
+  "keywords": [
+    "CRUD",
+    "Backend",
+    "MERN"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/purunaik2000/Employee-management-system-Backend/issues"
+  },
+  "homepage": "https://github.com/purunaik2000/Employee-management-system-Backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "nodemon": "^3.0.2"
+  }
+}

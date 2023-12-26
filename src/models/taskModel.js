@@ -9,7 +9,7 @@ const taskSchema = new mongoose.Schema({
     projectManager: {
         type: mongoose.Types.ObjectId,
         ref: 'Employee',
-        require: true
+        required: true
     },
     team: {
         type: [mongoose.Types.ObjectId],

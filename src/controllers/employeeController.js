@@ -2,7 +2,8 @@ const employeeModel = require('./../models/employeeModel');
 const employeeValidation = require('./../validation/employeeValidation');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 async function registerEmployee(req, res) {
     try {
         let data = req.body;
@@ -52,7 +53,7 @@ async function registerEmployee(req, res) {
         data.password = hash;
 
         // Store in database
-        let newEmp = new employeeModel(data);
+        await employeeModel.create(data);
 
         return res.status(201).send({
             status: true,
@@ -67,7 +68,7 @@ async function registerEmployee(req, res) {
     }
 }
 
-async function login(req, res) {
+async function loginEmployee(req, res) {
     try {
         let data = req.body;
 
@@ -104,7 +105,7 @@ async function login(req, res) {
         })
 
         // genrate token
-        let token = await jwt.sign(
+        let token = jwt.sign(
             { 
                 _id: emp._id,
                 email: emp.email,
@@ -126,9 +127,38 @@ async function login(req, res) {
     }
 }
 
-async function getEmployee(req, res) {
+async function getEmployeeById(req, res) {
     try {
+        let id = req.params.id;
 
+        if(!ObjectId.isValid(id)) return res.status(400).send({
+            status: false,
+            message: 'Invalid user id'
+        })
+
+        let emp = await employeeModel.findById(id).select({
+            firstName: 1,
+            lastName: 1,
+            gender: 1,
+            address: 1,
+            phoneNumber: 1,
+            email: 1,
+            dateOfBirth: 1,
+            dateOfJoining: 1,
+            type: 1,
+            designation: 1,
+            salary: 1
+        });
+
+        if(!emp) return res.status(404).send({
+            status: false,
+            message: 'User not found'
+        })
+
+        return res.status(200).send({
+            status: true,
+            data: emp
+        })
     } catch (err) {
         res.status(500).send({
             status: false,
@@ -168,4 +198,13 @@ async function deleteEmployee(req, res) {
             message: err.message
         })
     }
+}
+
+module.exports = {
+    registerEmployee,
+    loginEmployee,
+    getEmployeeById,
+    getEmployees,
+    updateEmployee,
+    deleteEmployee
 }

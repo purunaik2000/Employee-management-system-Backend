@@ -7,6 +7,10 @@ const {
     updateEmployee, 
     deleteEmployee
 } = require('./controllers/employeeController');
+const { 
+    authentication, 
+    authorization
+} = require('./middlewares/auth');
 
 router.get('/test', (req, res) => res.send('Working fine'));
 
@@ -16,6 +20,9 @@ router.post('/test1', (req, res) => {
 })
 
 router.post('/register', registerEmployee);
+router.post('/login', loginEmployee);
+
+router.get('/employee/:id', authentication, authorization, getEmployeeById);
 
 
 

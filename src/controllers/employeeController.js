@@ -109,15 +109,30 @@ async function loginEmployee(req, res) {
             { 
                 _id: emp._id,
                 email: emp.email,
+                type: emp.type
             },
             'jwtPrivateKey',
             { expiresIn: '1h' }
         )
 
+        const empData = {
+            firstName: emp.firstName,
+            lastName: emp.lastName,
+            designation: emp.designation,
+            salary: emp.salary,
+            phoneNumber: emp.phoneNumber,
+            email: emp.email,
+            address: emp.address,
+            dateOfJoining: emp.dateOfJoining,
+            gender: emp.gender,
+            dateOfBirth: emp.dateOfBirth
+        }
+
         res.send({
             status: true,
             message: 'You are logged in',
-            token: token
+            token: token,
+            data: empData
         })
     } catch (err) {
         res.status(500).send({

@@ -4,7 +4,7 @@ const router = require('./src/route');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017')
+mongoose.connect('mongodb://localhost:27017/employee_management')
 .then(()=>console.log('Connected with Database'))
 .catch((err)=>console.log(err.message));
 

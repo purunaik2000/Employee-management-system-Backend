@@ -20,6 +20,10 @@ router.post('/login', loginEmployee);
 router.get('/employee/:id', authentication, authorization, getEmployeeById);
 router.get('/employees', authentication, getEmployees);
 
+router.put('/employee/:id', authentication, authorization, updateEmployee);
+
+router.delete('/employee/:id', authentication, authorization, deleteEmployee);
+
 router.all('/*', (req, res)=>res.status(404).send({
     status: false,
     message: 'Not found'

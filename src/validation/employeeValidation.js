@@ -15,7 +15,7 @@ function employeeValidation(data) {
         ...rest
     } = data;
 
-    if(rest) return {
+    if(Object.keys(rest).length) return {
         status: false,
         message: 'Invalid input field'
     }
@@ -30,12 +30,12 @@ function employeeValidation(data) {
         message: 'Last name is only allowed to contain letters, spaces, and apostrophes'
     }
 
-    if((gender != 'Male') || (gender != 'Female')) return {
+    if((gender != 'Male') && (gender != 'Female')) return {
         status: false,
         message: 'Gender must be Male or Female'
     }
 
-    if((!address) || (typeof(address) != Object)) return {
+    if((!address) || (typeof(address) != "object")) return {
         status: false,
         message: 'Address is required'
     }
@@ -50,9 +50,9 @@ function employeeValidation(data) {
         }
     }
 
-    if(!/^[A-Za-z0-9][A-Za-z0-9 '/]{2,50}$/.test(address.street)) return {
+    if(!/^[A-Za-z0-9][A-Za-z0-9 '/,]{2,50}$/.test(address.street)) return {
         status: false,
-        message: 'Inavalid street'
+        message: 'Invalid street'
     }
 
     if(!/^[A-Za-z]{3,15}$/.test(address.city)) return {
@@ -95,12 +95,12 @@ function employeeValidation(data) {
         message: 'Invalid date of joining'
     }
 
-    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?&.])[A-Za-z\d@$!%#*?&.]{8,10}$/.test(password)) return {
+    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#*?&.])[A-Za-z\d@$!%#*?&.]{8,15}$/.test(password)) return {
         status: false,
         message: 'Password must contain minimum 8 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
     }
 
-    if((type != "admin") || (type != "Employee") || (type != "Intern")) return {
+    if((type != "admin") && (type != "employee") && (type != "intern")) return {
         status: false,
         message: 'Type must be admin, Employee or Intern'
     }

@@ -14,16 +14,15 @@ const {
 
 router.get('/test', (req, res) => res.send('Working fine'));
 
-router.post('/test1', (req, res) => {
-    console.log(req);
-    res.send('done');
-})
-
-router.post('/register', registerEmployee);
+router.post('/register', authentication, authorization, registerEmployee);
 router.post('/login', loginEmployee);
 
 router.get('/employee/:id', authentication, authorization, getEmployeeById);
+router.get('/employees', authentication, getEmployees);
 
-
+router.all('/*', (req, res)=>res.status(404).send({
+    status: false,
+    message: 'Not found'
+}))
 
 module.exports = router;

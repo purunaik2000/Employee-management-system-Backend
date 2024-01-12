@@ -184,7 +184,21 @@ async function getEmployeeById(req, res) {
 
 async function getEmployees(req, res) {
     try {
-
+        let employees = await employeeModel.find().select({
+            firstName: 1,
+            lastName: 1,
+            gender: 1,
+            address: 1,
+            phoneNumber: 1,
+            email: 1,
+            dateOfBirth: 1,
+            dateOfJoining: 1,
+            designation: 1,
+        });
+        return res.status(200).send({
+            status: true,
+            data: employees
+        })
     } catch (err) {
         res.status(500).send({
             status: false,
@@ -195,7 +209,7 @@ async function getEmployees(req, res) {
 
 async function updateEmployee(req, res) {
     try {
-
+        
     } catch (err) {
         res.status(500).send({
             status: false,

@@ -36,7 +36,7 @@ const employeeSchema = new mongoose.Schema({
         default: 'Male',
     },
     dateOfBirth: {
-        type: Date,
+        type: String,
         required: true
     },
     designation: {
@@ -46,11 +46,11 @@ const employeeSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["admin", "Employee", "Intern"],
+        enum: ["admin", "employee", "intern"],
         default: 'Intern'
     },
     dateOfJoining: {
-        type: Date,
+        type: String,
         required: true
     },
     salary: {
